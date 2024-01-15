@@ -30,6 +30,10 @@ jobs:
           git tag "v${{ github.event.inputs.version }}"
           echo "TARGET_COMMITISH=$(git rev-parse HEAD)" >> $GITHUB_ENV
 
+      - name: 'Install'
+        shell: bash
+        run: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+
       - name: Push tag
         run: |
           git push origin "v${{ github.event.inputs.version }}"
